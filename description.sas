@@ -24,23 +24,42 @@ The all .sas programs contaied in /tmp/program and its sub-directories will be i
 See the help for the `IncludeAll` macro to find more examples. 
 
 2. SetUTF8 macro which changes encoding of datasets to UTF8 in specified directory at once.
-
+Typical usage of "trancd2u8_d" macro is shown in below.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  %trancd2u8_d(/tmp/program)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
 3. Read_csv_in_folder macro which makes datasets from all csv files in specified directory at once.
-
+ 
+Typical usage of "Read_csv_in_folder" macro is shown in below.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  %Read_csv_in_folder(path="/example/homes/SampleUser/SASPac/tmp1_csvFiles")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+All .csv file(s) to be imported exists in a folder of "/example/homes/SampleUser/SASPac/tmp1_csvFiles".
+See the help for the `Read_csv_in_folder` macro to find more examples.
+ 
 4. Read_excel_in_folder macro which makes datasets from all excel files in specified directory at once.
+ 
+Typical usage of "Read_excel_in_folder" macro is shown in below.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  %Read_excel_in_folder(path="/example/homes/SampleUser/SASPac/tmp1_excelFiles")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+All .xslx file(s) to be imported exists in a folder of "/example/homes/SampleUser/SASPac/tmp1_excelFiles".
+See the help for the `Read_excel_in_folder` macro to find more examples.
+-----------------------------------------------------------------------------------------------------------------------------------
 
 ### Content ###################################################################
 
-SQLinDS package contains the following components:
+SASToolbox package contains the following components:
 
-1. `IncludeAll` macro - the main package macro available for the User
-2. `Prv_DoIncludingProcess.sas` internal used macro
-3. `Prv_IncludeSASFile` internal used macro
-4. `Prv_IncludeSASFileHalper` internal used macro
-5. `Prv_MakeIncludingFileList.sas` internal used macro
-6. `Prv_RSUFile_GetContentsHelper.sas` internal used macro
-7.
-8.
-9.
+1. `IncludeAll` macro - the main macro available for the User
+2. `Read_csv_in_folder`- the main macro available for the User
+3. `Read_excel_in_folder` - the main macro available for the User
+3. `trancd2u8_d` - the main macro available for the User
+5. `Prv_IAI__DoIncludingProcess` internal macro used by IncludeAll macro
+6. `Prv_IAI__GetContentsHelper` internal macro used by IncludeAll macro
+7. `Prv_IAI__IncludeSASFileHalper` internal macro used by IncludeAll macro
+8. `Prv_IAI__IncludeSASFile` internal macro used by IncludeAll macro
+9. `Prv_IAI__MakeSASFileList` internal macro used by IncludeAll macro
 
 DESCRIPTION END:
