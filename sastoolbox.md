@@ -10,12 +10,12 @@
   
 - Package: SASToolbox
 - Version: 1.0.0
-- Generated: 2025-09-18T17:10:36
+- Generated: 2025-09-21T16:15:52
 - Author(s): Shingo Suzuki(shingo.suzuki@sas.com)
 - Maintainer(s): Shingo Suzuki(shingo.suzuki@sas.com)
 - License: SAS
-- File SHA256: `F*3E7D318938CC2DC44A362DE4D50E4D4105ED38E4DBDFD22B4606F9310183AA7D` for this version
-- Content SHA256: `C*8EFAAE14AA2EA3B28A23167C682D5F976A64AB165096F010461F53EFB0BE9787` for this version
+- File SHA256: `F*600DC94D08DBFC7F6BEADF3A7A05B3F4390D4AA7AB3004F65C652AD9CA5C3D03` for this version
+- Content SHA256: `C*F39FAC23A8483BD3195C5AF199446C81AEB223ED40A9BE14C69D77CFDFFD0C65` for this version
   
 ---
  
@@ -272,6 +272,9 @@ Each excel file will be imported as a SAS dataset with the same name and saved i
 If the filename exceeds 32 characters, that file will be skipped, but the others will be processed.
 
 Note:
+  
+  This program requires the "SAS/ACCESS to PC Files" license.
+  Without this license, DBMS=XLSX will not work and will result in an error.
 　Only the first sheet of each excel file will be imported.
  
 ### Parameters
@@ -290,18 +293,30 @@ All .xlsx file(s) to be imported exists in a folder of "/example/homes/SampleUse
  
 ## `%trancd2u8_d()` macro <a name="trancd2u8d-macro-9"></a> ######
 
-`%trancd2u8_d` is a macro to change encoding of dataset to UTF8.
- 
-### Parameters
+This macro copies folders under the specified folder and converts SAS datasets in ‘sas7bdat’ format within them to UTF-8 encoding.
+Only files in the ‘sas7bdat’ format and the folder containing them will be copied. Other files and folders not containing SAS datasets will not be copied.
+The copied files are output to a list containing table names, column information, column lengths, and other details. The list is output to the Work library by default, but you can also output it as a CSV file by specifying a filename as an option.
 
-	- directory_path     : directory path contains datasets to be processed.
-	- transcode_dir_path : directory path where processed datasets will be stored.
-	- compress_yn        : compress option
-	- contents_yn        : ******
-	- length_obs        : ******
- 
+This macro program will only run in environments that meet the following conditions.
+・SAS 9.4 running on Japanese Windows
+・SAS 9.4 uses Unicode encoding with LOCALE=JA_JP
+
+### Parameters
+- directory_path : Specify the full path to the directory where the data to be converted is stored.
+- transcode_dir_path : Specify the full path to the folder where the converted data and folder structure will be placed.
+- compress_yn : Specifies whether to perform the conversion process using the compress option. The default is ‘y’. Specifying a value other than ‘y’ will not use compress.
+- contents_yn : Specify whether to output the results list to a CSV file.If you specify anything other than ‘n’, a CSV file will be saved directly under the folder specified in ‘transcode_dir_path’, using the specified value as the filename.
+- length_obs : Specifies whether to obtain the maximum length of the actual data for character variables contained in the converted data. In the case of ‘n’, the process to obtain the maximum data length is not performed. If a number is specified, the maximum length is checked up to that number of rows. When ‘MAX’ is specified, the maximum length is checked for all rows.
+
 ### Sample code
- 
+Execute by specifying only the target directory.
+%trancd2u8_d(D:\SASPSD\SASPJ-93\SASData);
+
+Output the converted results to the ‘result.csv’ file.
+%trancd2u8_d(D:\SASPSD\SASPJ-93\SASData,D:\SASPSD\SASPJ-93\SASData_UTF8,contents_yn=result.csv);
+
+Determine the actual length of the converted character variable for all records and obtain the maximum length.
+%trancd2u8_d(D:\SASPSD\SASPJ-93\SASData,D:\SASPSD\SASPJ-93\SASData_UTF8,length_obs=MAX);
 
   
 ---
