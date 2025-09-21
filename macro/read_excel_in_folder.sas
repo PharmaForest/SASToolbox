@@ -5,6 +5,9 @@ Each excel file will be imported as a SAS dataset with the same name and saved i
 If the filename exceeds 32 characters, that file will be skipped, but the others will be processed.
 
 Note:
+  
+  This program requires the "SAS/ACCESS to PC Files" license.
+  Without this license, DBMS=XLSX will not work and will result in an error.
 　Only the first sheet of each excel file will be imported.
  
 ### Parameters
@@ -19,6 +22,8 @@ All .xlsx file(s) to be imported exists in a folder of "/example/homes/SampleUse
 ~~~
 
 *//*** HELP END ***/
+
+option mprint;
 
 %macro Read_excel_in_folder(path=);
 
@@ -71,3 +76,4 @@ proc delete data=work.TableList; run;
 %mend Read_excel_in_folder;
 
 
+%Read_excel_in_folder(path="C:\Users\jpnmyn\Downloads\BaseSAS\SASPAC_prep\tmp2_excelFiles");
