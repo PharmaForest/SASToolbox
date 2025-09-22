@@ -4,7 +4,7 @@ Title : SASToolbox package
 Version : 1.0.0
 Author : Shingo Suzuki(shingo.suzuki@sas.com)
 Maintainer : Shingo Suzuki(shingo.suzuki@sas.com)
-License : SAS
+License : MIT
 Encoding : UTF8
 Required : "Base SAS Software"
 ReqPackages :  
